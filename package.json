@@ -1,0 +1,33 @@
+{
+  "name": "pinch",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pinterest video to MP4. That's it.",
+  "license": "MIT",
+  "homepage": "https://ingeniousfrog.github.io/Pinch/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ingeniousfrog/Pinch.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run typecheck && npm run test:coverage && npm run build"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^24.13.3",
+    "@vitest/coverage-v8": "^4.1.11",
+    "jsdom": "^29.1.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11"
+  }
+}

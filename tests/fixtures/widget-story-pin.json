@@ -1,0 +1,46 @@
+{
+  "status": "success",
+  "code": 0,
+  "message": "ok",
+  "data": [
+    {
+      "id": "111111111111111111",
+      "grid_title": "A tiny demo",
+      "description": "Fixture story Pin",
+      "images": {
+        "564x": {
+          "width": 564,
+          "height": 1002,
+          "url": "https://i.pinimg.com/564x/e8/42/bb/e842bbbf3c5eee49470ece98fdf9a7a1.jpg"
+        }
+      },
+      "videos": null,
+      "is_video": false,
+      "story_pin_data": {
+        "pages": [
+          {
+            "blocks": [
+              {
+                "type": "story_pin_video_block",
+                "video": {
+                  "video_list": {
+                    "V_HLSV4": {
+                      "width": 576,
+                      "height": 1024,
+                      "url": "https://v1.pinimg.com/videos/iht/hls/68/d4/48/demo.m3u8"
+                    },
+                    "V_720P": {
+                      "width": 576,
+                      "height": 1024,
+                      "url": "https://v1.pinimg.com/videos/iht/expMp4/68/d4/48/demo_720w.mp4"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

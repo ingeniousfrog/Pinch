@@ -1,0 +1,25 @@
+{
+  "id": "24680",
+  "description": "Alternate Pinterest shapes",
+  "media": {
+    "videoList": {
+      "V_EXP7": {
+        "width": 1080,
+        "height": 1920,
+        "url": "https://v2.pinimg.com/videos/iht/expMp4/demo_trial_1080w.mp4",
+        "codec": "hvc1"
+      },
+      "V_720P": {
+        "width": 720,
+        "height": 1280,
+        "url": "https://v2.pinimg.com/videos/iht/expMp4/demo_720w.mp4",
+        "codec": "avc1.64001f"
+      }
+    },
+    "videoUrls": [
+      "https://v2.pinimg.com/videos/iht/expMp4/demo_720w.mp4",
+      "https://example.com/not-pinterest.mp4",
+      "javascript:alert(1)"
+    ]
+  }
+}

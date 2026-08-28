@@ -1,0 +1,33 @@
+{
+  "id": "222222222222222222",
+  "title": "Progressive fixture",
+  "closeup_unified_description": "Several quality levels",
+  "images": {
+    "orig": {
+      "width": 720,
+      "height": 1280,
+      "url": "https://i.pinimg.com/originals/af/53/ef/poster.jpg"
+    }
+  },
+  "videos": {
+    "video_list": {
+      "V_360P": {
+        "width": 360,
+        "height": 640,
+        "bitrate": 420000,
+        "url": "https://v1.pinimg.com/videos/iht/expMp4/aa/df/40/demo_360w.mp4"
+      },
+      "V_720P": {
+        "width": 720,
+        "height": 1280,
+        "bitrate": 1200000,
+        "url": "https://v1.pinimg.com/videos/iht/expMp4/aa/df/40/demo_720w.mp4"
+      },
+      "V_HLSV4": {
+        "width": 720,
+        "height": 1280,
+        "url": "https://v1.pinimg.com/videos/iht/hls/aa/df/40/demo.m3u8"
+      }
+    }
+  }
+}
