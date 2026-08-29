@@ -12,7 +12,7 @@ Pinch 是一个纯静态前端工具：粘贴公开 Pin 链接，选取 Pinteres
 
 | 能力 | 说明 |
 | --- | --- |
-| 解析范围 | 公开 `pinterest.com/pin/<数字 ID>` 链接（含常见子域与地区域名） |
+| 解析范围 | 公开 `pinterest.com/pin/<数字 ID>` 链接（含完整 `/sent/` 分享链接、常见子域与地区域名） |
 | 媒体优先序 | 优先渐进式 MP4；检测到 HLS 但浏览器不可读时给出明确错误 |
 | 下载策略 | 可读时直接 Blob 下载；跨域不可读时诚实提示「打开原片」 |
 | 部署形态 | Vite 静态站点，可托管于 GitHub Pages，生产路径前缀 `/Pinch/` |
@@ -21,7 +21,7 @@ Pinch 是一个纯静态前端工具：粘贴公开 Pin 链接，选取 Pinteres
 ## 使用方法
 
 1. 打开 [在线演示](https://ingeniousfrog.github.io/Pinch/)，或本地启动开发服务。
-2. 粘贴公开 Pin 链接，例如 `https://www.pinterest.com/pin/<numeric-id>/`。
+2. 粘贴公开 Pin 链接，例如 `https://www.pinterest.com/pin/<numeric-id>/`；完整的 Pinterest `/sent/` 分享链接也可以直接使用。
 3. 点击 **Get MP4**，预览解析到的最优渐进式源。
 4. 按界面提示操作：
    - **Download MP4**：浏览器可读取原始字节并保存，无需转码。
@@ -34,13 +34,14 @@ Pinch 是一个纯静态前端工具：粘贴公开 Pin 链接，选取 Pinteres
 **支持**
 
 - 公开的 `pinterest.com/pin/<numeric-id>` URL
+- 以 `/sent/` 结尾的完整 Pinterest 分享 URL（查询参数会被忽略）
 - 普通子域（如 `www.pinterest.com`）与地区域名（如 `pinterest.co.uk`）
 - Pinterest 视频 CDN（`v*.pinimg.com`）上的渐进式 MP4
 - HLS 检测；在浏览器无法访问时返回明确的能力边界错误
 
 **不支持**
 
-- `pin.it` 短链
+- 自动解析 `pin.it` 短链；纯静态应用会改为提示用户打开短链，再复制完整的 `pinterest.com/pin/...` URL
 - 私密 Pin、登录、Cookie 或账号体系
 - 图板、个人页、图片、Feed、搜索与批量下载
 - 任意 CORS 代理、第三方下载站或服务端中转
@@ -50,6 +51,7 @@ Pinch 是一个纯静态前端工具：粘贴公开 Pin 链接，选取 Pinteres
 
 ```text
 公开 Pin URL
+  → 识别 pin.it 短链并说明纯静态应用的转换方法
   → 校验并提取数字 Pin ID
   → 请求 Pinterest 公开 widget JSON
   → 递归归一化支持的视频表示

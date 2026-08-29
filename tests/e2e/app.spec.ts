@@ -20,6 +20,16 @@ test("shows a human-readable invalid URL error", async ({ page }) => {
   await expect(page.getByTestId("error-message")).toHaveText("Invalid Pinterest URL");
 });
 
+test("explains the static-app workaround for pin.it short links", async ({ page }) => {
+  await page.getByPlaceholder("Paste a Pinterest URL…").fill("https://pin.it/demoShort");
+  await page.getByRole("button", { name: /Get MP4/ }).click();
+
+  await expect(page.getByTestId("error-message")).toHaveText(
+    "Pinterest short links cannot be resolved in this static app. "
+      + "Open the link, then copy the full pinterest.com/pin/... URL.",
+  );
+});
+
 test("resolves a live public Pin and exposes the honest MP4 action", async ({ page }, testInfo) => {
   test.skip(!primaryLivePin, livePinSkipReason);
   if (!primaryLivePin) {

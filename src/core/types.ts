@@ -25,6 +25,7 @@ export interface ParsedPinUrl {
 
 export type PinchErrorCode =
   | "invalid_url"
+  | "short_url_unsupported"
   | "pin_not_found"
   | "no_video"
   | "cross_origin_blocked"

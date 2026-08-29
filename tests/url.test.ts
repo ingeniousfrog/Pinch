@@ -27,6 +27,21 @@ describe("parsePinterestUrl", () => {
       });
   });
 
+  it("normalizes a full Pinterest sent-share URL", () => {
+    expect(parsePinterestUrl(
+      "https://www.pinterest.com/pin/111111111111111111/sent/?invite_code=demo&sfo=1",
+    )).toEqual({
+      pinId: "111111111111111111",
+      canonicalUrl: "https://www.pinterest.com/pin/111111111111111111/",
+    });
+  });
+
+  it("explains how to use a pin.it short link in the static app", () => {
+    expect(() => parsePinterestUrl("https://pin.it/demoShort")).toThrow(
+      "Pinterest short links cannot be resolved in this static app. Open the link, then copy the full pinterest.com/pin/... URL.",
+    );
+  });
+
   it.each([
     "",
     "not a url",
@@ -35,7 +50,6 @@ describe("parsePinterestUrl", () => {
     "https://www.pinterest.com/pin/not-numeric/",
     "https://www.pinterest.com/pin/123/extra",
     `https://www.pinterest.com/pin/${"1".repeat(31)}/`,
-    "https://pin.it/abc123",
   ])("rejects unsupported input %s", (input) => {
     expect(() => parsePinterestUrl(input)).toThrow("Invalid Pinterest URL");
   });

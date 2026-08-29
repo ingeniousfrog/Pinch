@@ -12,7 +12,7 @@ Pinch is a static browser utility for one job: paste a public Pin URL and obtain
 
 | Area | Detail |
 | --- | --- |
-| Scope | Public `pinterest.com/pin/<numeric-id>` URLs, including common subdomains and locale domains |
+| Scope | Public `pinterest.com/pin/<numeric-id>` URLs, including full `/sent/` share URLs, common subdomains, and locale domains |
 | Media preference | Progressive MP4 first; HLS is detected and reported when browser access is blocked |
 | Download policy | Blob download when readable; honest “open original” fallback when CORS blocks file access |
 | Deployment | Vite static site for GitHub Pages with production base `/Pinch/` |
@@ -21,7 +21,7 @@ Pinch is a static browser utility for one job: paste a public Pin URL and obtain
 ## Usage
 
 1. Open the [live demo](https://ingeniousfrog.github.io/Pinch/), or run the local development server.
-2. Paste a public Pin URL such as `https://www.pinterest.com/pin/<numeric-id>/`.
+2. Paste a public Pin URL such as `https://www.pinterest.com/pin/<numeric-id>/`. Full Pinterest `/sent/` share URLs also work.
 3. Select **Get MP4** and preview the best progressive source Pinch found.
 4. Follow the action Pinch shows:
    - **Download MP4** — the browser can read the original bytes and save a Blob without re-encoding.
@@ -34,6 +34,7 @@ Opening a source is never reported as a completed download.
 **Supported**
 
 - Public `pinterest.com/pin/<numeric-id>` URLs
+- Full Pinterest share URLs ending in `/sent/` (query parameters are ignored)
 - Ordinary subdomains such as `www.pinterest.com`
 - Locale domains such as `pinterest.co.uk`
 - Progressive MP4 sources on Pinterest’s `v*.pinimg.com` video CDN
@@ -41,7 +42,7 @@ Opening a source is never reported as a completed download.
 
 **Not supported**
 
-- `pin.it` short links
+- Automatic `pin.it` short-link resolution. The static app explains how to open the short link and copy the full `pinterest.com/pin/...` URL instead.
 - Private Pins, authentication, accounts, or cookies
 - Boards, profiles, images, feeds, search, and bulk downloads
 - Arbitrary CORS proxies, third-party download sites, or server-side relays
@@ -51,6 +52,7 @@ Opening a source is never reported as a completed download.
 
 ```text
 public Pin URL
+  → detect pin.it short links and explain the static-app workaround
   → validate and extract numeric Pin ID
   → fetch Pinterest’s public widget JSON
   → recursively normalize supported video representations

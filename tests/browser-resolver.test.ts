@@ -44,6 +44,22 @@ describe("BrowserResolver", () => {
     );
   });
 
+  it("resolves a full sent-share URL through the normalized Pin ID", async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response(JSON.stringify(widgetPayload), { status: 200 }),
+    );
+    const resolver = new BrowserResolver(fetcher);
+
+    await resolver.resolve(
+      "https://www.pinterest.com/pin/111111111111111111/sent/?invite_code=demo&sfo=1",
+    );
+
+    expect(fetcher).toHaveBeenCalledWith(
+      "https://widgets.pinterest.com/v3/pidgets/pins/info/?pin_ids=111111111111111111",
+      expect.objectContaining({ credentials: "omit" }),
+    );
+  });
+
   it("reports an empty widget result as a missing Pin", async () => {
     const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
       new Response(JSON.stringify({ status: "success", data: [] }), { status: 200 }),

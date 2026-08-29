@@ -1,11 +1,20 @@
 import { PinchError } from "./errors";
 import type { ParsedPinUrl } from "./types";
 
-const PIN_PATH = /^\/pin\/(\d{1,30})\/?$/;
+const PIN_PATH = /^\/pin\/(\d{1,30})(?:\/sent)?\/?$/;
+const PINTEREST_SHORT_HOST = /^(?:www\.)?pin\.it$/i;
 const PINTEREST_HOST = /^(?:[a-z0-9-]+\.)?pinterest\.(?:com|[a-z]{2}|co\.[a-z]{2})$/i;
 
 const invalidUrl = (): never => {
   throw new PinchError("invalid_url", "Invalid Pinterest URL");
+};
+
+const unsupportedShortUrl = (): never => {
+  throw new PinchError(
+    "short_url_unsupported",
+    "Pinterest short links cannot be resolved in this static app. "
+      + "Open the link, then copy the full pinterest.com/pin/... URL.",
+  );
 };
 
 export const parsePinterestUrl = (input: string): ParsedPinUrl => {
@@ -21,10 +30,13 @@ export const parsePinterestUrl = (input: string): ParsedPinUrl => {
     return invalidUrl();
   }
 
-  if (
-    (url.protocol !== "https:" && url.protocol !== "http:") ||
-    !PINTEREST_HOST.test(url.hostname)
-  ) {
+  if (url.protocol !== "https:" && url.protocol !== "http:") {
+    return invalidUrl();
+  }
+  if (PINTEREST_SHORT_HOST.test(url.hostname)) {
+    return unsupportedShortUrl();
+  }
+  if (!PINTEREST_HOST.test(url.hostname)) {
     return invalidUrl();
   }
 
